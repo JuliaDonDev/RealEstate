@@ -1,0 +1,73 @@
+﻿@using Microsoft.Extensions.Logging.EventLog
+@model SoldEstateViewModel
+
+<h3 class="text-center">Sold real estate</h3>
+@if (Model.SoldEstates.Any())
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th class="text-center">Address</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Area</th>
+            <th class="text-center">Sold date</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var line in Model.SoldEstates)
+        {
+            <tr>
+                <td class="text-center">
+                    @if (string.IsNullOrEmpty(@line.Address))
+                    {
+                        <label>Unknown</label>
+                    }
+                    else
+                    {
+                        @line.Address
+                    }
+                </td>
+                <td class="text-center">
+                    <span class="badge badge-pill badge-primary" style="float: right">
+                        <small>
+                            @if (string.IsNullOrEmpty(@line.Price))
+                            {
+                                <label>Unknown</label>
+                            }
+                            else
+                            {
+                                @line.Price
+                            }
+                        </small>
+                    </span>
+                </td>
+                <td class="text-center">
+                    @if (string.IsNullOrEmpty(@line.Area))
+                    {
+                        <label>Unknown</label>
+                    }
+                    else
+                    {
+                        @line.Area
+                    }
+                </td>
+                <td class="text-center">
+                    @if (string.IsNullOrEmpty(@line.VariableData["text"]))
+                    {
+                        <label>Unknown</label>
+                    }
+                    else
+                    {
+                        @line.VariableData["text"]
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <label class="text-center">No sold estate found.</label>
+}
+
